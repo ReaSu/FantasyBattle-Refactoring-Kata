@@ -11,18 +11,18 @@ class Player extends Target {
     }
 
     Damage calculateDamage(Target other) {
-        int soak = getSoak(other, getTotalDamage());
+        int soak = getSoak(other);
         return new Damage(Math.max(0, getTotalDamage() - soak));
     }
 
 
 
-    private int getSoak(Target other, int totalDamage) {
+    private int getSoak(Target other) {
         int soak = 0;
         if (other instanceof Player) {
             // TODO: Not implemented yet
             //  Add friendly fire
-            soak = totalDamage;
+            soak = getTotalDamage();
         } else if (other instanceof SimpleEnemy) {
             SimpleEnemy simpleEnemy = (SimpleEnemy) other;
             final float modifiedBuffs = simpleEnemy.getModifiedBuffs();
