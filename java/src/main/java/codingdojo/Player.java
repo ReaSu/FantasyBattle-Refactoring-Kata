@@ -3,20 +3,19 @@ package codingdojo;
 
 class Player extends Target {
     private final Equipment equipment;
-    private Stats stats;
+    private final float modifiedStrength;
 
     Player(Stats stats, Equipment equipment) {
         this.equipment = equipment;
-        this.stats = stats;
+        this.modifiedStrength = stats.getModifiedStrength();
     }
 
     Damage calculateDamage(Target other) {
-        int baseDamage = getBaseDamage();
-        float damageModifier = getDamageModifier();
-        int totalDamage = Math.round(baseDamage * damageModifier);
-        int soak = getSoak(other, totalDamage);
-        return new Damage(Math.max(0, totalDamage - soak));
+        int soak = getSoak(other, getTotalDamage());
+        return new Damage(Math.max(0, getTotalDamage() - soak));
     }
+
+
 
     private int getSoak(Target other, int totalDamage) {
         int soak = 0;
@@ -41,11 +40,16 @@ class Player extends Target {
     }
 
     public float getDamageModifier() {
-        float strengthModifier = stats.getStrength() * 0.1f;
-        return strengthModifier + equipment.getDamageModifier();
+        return modifiedStrength + equipment.getDamageModifier();
     }
 
     public int getBaseDamage() {
         return equipment.getBaseDamage();
+    }
+
+    public int getTotalDamage() {
+        int baseDamage = getBaseDamage();
+        float damageModifier = getDamageModifier();
+        return Math.round(baseDamage * damageModifier);
     }
 }
