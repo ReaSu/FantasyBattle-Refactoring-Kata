@@ -3,6 +3,9 @@ package codingdojo;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -95,5 +98,20 @@ public class PlayerTest {
 
         int totalDamage = new Player(stats, equipment).getTotalDamage();
         assertEquals(52, totalDamage);
+    }
+
+    @Test
+    public void buffsShouldBeX() {
+        Equipment equipment = mock(Equipment.class);
+        Stats stats = mock(Stats.class);
+        Buff buff = mock(Buff.class);
+        List<Buff> buffList = Arrays.asList(buff);
+        SimpleEnemy simpleEnemy = mock(SimpleEnemy.class);
+        when(buff.soakModifier()).thenReturn(1f);
+        when(simpleEnemy.getBuffs()).thenReturn(buffList);
+
+
+        float buffs = new Player(stats, equipment).getBuffs(simpleEnemy);
+        assertEquals(1f, buffs);
     }
 }
