@@ -34,14 +34,29 @@ public class EnemyTest {
     }
 
     @Test
-    public void enemyDamageSoakShouldBeX() {
+    public void enemyDamageSoakShouldBe1() {
         Buff buff = mock(Buff.class);
         List<Buff> buffList = Arrays.asList(buff);
-        when(buff.soakModifier()).thenReturn(1f);
         Armor armor = mock(Armor.class);
+
+        when(buff.soakModifier()).thenReturn(1f);
         when(armor.getDamageSoak()).thenReturn(1);
 
         int damageSoak = new SimpleEnemy(armor, buffList).getDamageSoak();
         assertEquals(1, damageSoak);
+    }
+
+    @Test
+    void fullDamageSoakShouldBeX() {
+        Buff buff = mock(Buff.class);
+        List<Buff> buffList = Arrays.asList(buff);
+        Armor armor = mock(Armor.class);
+
+        when(buff.soakModifier()).thenReturn(1f);
+        when(armor.getDamageSoak()).thenReturn(1);
+        when(armor.getDamageSoak()).thenReturn(1);
+
+        int fullDamageSoak = new SimpleEnemy(armor, buffList).getFullSoak();
+        assertEquals(2, fullDamageSoak);
     }
 }
