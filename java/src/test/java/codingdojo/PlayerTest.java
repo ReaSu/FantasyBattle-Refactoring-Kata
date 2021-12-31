@@ -30,16 +30,6 @@ public class PlayerTest {
         Equipment equipment = mock(Equipment.class);
         Stats stats = mock(Stats.class);
         when(stats.getModifiedStrength()).thenReturn(0.1f);
-        Item leftHand = mock(Item.class);
-        Item rightHand = mock(Item.class);
-        Item head = mock(Item.class);
-        Item feet = mock(Item.class);
-        Item chest = mock(Item.class);
-        when(leftHand.getBaseDamage()).thenReturn(0);
-        when(rightHand.getBaseDamage()).thenReturn(10);
-        when(head.getBaseDamage()).thenReturn(0);
-        when(feet.getBaseDamage()).thenReturn(0);
-        when(chest.getBaseDamage()).thenReturn(0);
         when(equipment.getBaseDamage()).thenReturn(10);
 
         int baseDamage = new Player(stats, equipment).getBaseDamage();
@@ -50,21 +40,6 @@ public class PlayerTest {
     void damageModifierFromEquipmentShouldBeX() {
         Equipment equipment = mock(Equipment.class);
         Stats stats = mock(Stats.class);
-        Item leftHand = mock(Item.class);
-        Item rightHand = mock(Item.class);
-        Item head = mock(Item.class);
-        Item feet = mock(Item.class);
-        Item chest = mock(Item.class);
-        when(equipment.getLeftHand()).thenReturn(leftHand);
-        when(equipment.getRightHand()).thenReturn(rightHand);
-        when(equipment.getHead()).thenReturn(head);
-        when(equipment.getFeet()).thenReturn(feet);
-        when(equipment.getChest()).thenReturn(chest);
-        when(leftHand.getDamageModifier()).thenReturn(1.4f);
-        when(rightHand.getDamageModifier()).thenReturn(1.0f);
-        when(head.getDamageModifier()).thenReturn(1.2f);
-        when(feet.getDamageModifier()).thenReturn(0.1f);
-        when(chest.getDamageModifier()).thenReturn(1.4f);
         when(stats.getModifiedStrength()).thenReturn(0.1f);
         when(equipment.getDamageModifier()).thenReturn(5.1f);
 
@@ -77,21 +52,7 @@ public class PlayerTest {
     void totalDamageShouldBeX() {
         Equipment equipment = mock(Equipment.class);
         Stats stats = mock(Stats.class);
-        Item leftHand = mock(Item.class);
-        Item rightHand = mock(Item.class);
-        Item head = mock(Item.class);
-        Item feet = mock(Item.class);
-        Item chest = mock(Item.class);
-        when(equipment.getLeftHand()).thenReturn(leftHand);
-        when(equipment.getRightHand()).thenReturn(rightHand);
-        when(equipment.getHead()).thenReturn(head);
-        when(equipment.getFeet()).thenReturn(feet);
-        when(equipment.getChest()).thenReturn(chest);
-        when(leftHand.getDamageModifier()).thenReturn(1.4f);
-        when(rightHand.getDamageModifier()).thenReturn(1.0f);
-        when(head.getDamageModifier()).thenReturn(1.2f);
-        when(feet.getDamageModifier()).thenReturn(0.1f);
-        when(chest.getDamageModifier()).thenReturn(1.4f);
+
         when(stats.getModifiedStrength()).thenReturn(0.1f);
         when(equipment.getDamageModifier()).thenReturn(5.1f);
         when(equipment.getBaseDamage()).thenReturn(10);
