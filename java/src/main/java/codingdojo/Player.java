@@ -25,19 +25,12 @@ class Player extends Target {
             soak = totalDamage;
         } else if (other instanceof SimpleEnemy) {
             SimpleEnemy simpleEnemy = (SimpleEnemy) other;
-            final float buffs = getBuffs(simpleEnemy);
+            final float buffs = simpleEnemy.getTotalBuffs();
             final float modifiedBuffs = buffs + 1f;
             final int damageSoak = simpleEnemy.getArmor().getDamageSoak();
             soak = Math.round(damageSoak * modifiedBuffs);
         }
         return soak;
-    }
-
-    public float getBuffs(SimpleEnemy simpleEnemy) {
-        return (float) simpleEnemy.getBuffs()
-                                  .stream()
-                                  .mapToDouble(Buff::soakModifier)
-                                  .sum();
     }
 
     public float getDamageModifier() {

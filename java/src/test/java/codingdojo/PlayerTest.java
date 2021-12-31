@@ -109,9 +109,10 @@ public class PlayerTest {
         SimpleEnemy simpleEnemy = mock(SimpleEnemy.class);
         when(buff.soakModifier()).thenReturn(1f);
         when(simpleEnemy.getBuffs()).thenReturn(buffList);
+        when(simpleEnemy.getTotalBuffs()).thenReturn(1f);
 
-
-        float buffs = new Player(stats, equipment).getBuffs(simpleEnemy);
+        new Player(stats, equipment);
+        float buffs = simpleEnemy.getTotalBuffs();
         assertEquals(1f, buffs);
     }
 }

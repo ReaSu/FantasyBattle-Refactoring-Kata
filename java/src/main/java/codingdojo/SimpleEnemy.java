@@ -21,4 +21,11 @@ public class SimpleEnemy extends Target {
     Armor getArmor() {
         return this.armor;
     }
+
+    float getTotalBuffs() {
+        return (float) buffs
+                .stream()
+                .mapToDouble(Buff::soakModifier)
+                .sum();
+    }
 }
