@@ -41,8 +41,6 @@ class Player extends Target {
     }
 
     public int getTotalDamage() {
-        int baseDamage = getBaseDamage();
-        float damageModifier = getDamageModifier();
-        return Math.round(baseDamage * damageModifier);
+        return Math.round(getBaseDamage() * getDamageModifier());
     }
 }
