@@ -3,9 +3,6 @@ package codingdojo;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -60,6 +57,5 @@ public class PlayerTest {
         int totalDamage = new Player(stats, equipment).getTotalDamage();
         assertEquals(52, totalDamage);
     }
-
 
 }

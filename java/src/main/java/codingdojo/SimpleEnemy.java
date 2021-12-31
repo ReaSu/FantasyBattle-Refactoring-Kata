@@ -1,14 +1,11 @@
 package codingdojo;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class SimpleEnemy extends Target {
-
     public static final float BUFF_MODIFIER = 1f;
-    private Armor armor;
-    private List<Buff> buffs;
+    protected Armor armor;
+    protected List<Buff> buffs;
 
     public SimpleEnemy(Armor armor, List<Buff> buffs) {
         this.armor = armor;
@@ -36,5 +33,10 @@ public class SimpleEnemy extends Target {
 
     int getDamageSoak() {
         return armor.getDamageSoak();
+    }
+
+    @Override
+    int getFullSoak() {
+        return Math.round(getDamageSoak() * getModifiedBuffs());
     }
 }

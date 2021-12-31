@@ -24,23 +24,25 @@ class Player extends Target {
             //  Add friendly fire
             soak = getTotalDamage();
         } else if (other instanceof SimpleEnemy) {
-            SimpleEnemy simpleEnemy = (SimpleEnemy) other;
-            final float modifiedBuffs = simpleEnemy.getModifiedBuffs();
-            final int damageSoak = simpleEnemy.getDamageSoak();
-            soak = Math.round(damageSoak * modifiedBuffs);
+            soak = other.getFullSoak();
         }
         return soak;
     }
 
-    public float getDamageModifier() {
+    float getDamageModifier() {
         return modifiedStrength + equipment.getDamageModifier();
     }
 
-    public int getBaseDamage() {
+    int getBaseDamage() {
         return equipment.getBaseDamage();
     }
 
-    public int getTotalDamage() {
+    int getTotalDamage() {
         return Math.round(getBaseDamage() * getDamageModifier());
+    }
+
+    @Override
+    int getFullSoak() {
+        return getTotalDamage();
     }
 }
