@@ -12,43 +12,36 @@ import static org.mockito.Mockito.when;
 public class EnemyTest {
 
     @Test
-    public void modifiedBuffsShouldBe2f() {
+    public void buffsShouldBeX() {
         Buff buff = mock(Buff.class);
+        Armor armor = mock(Armor.class);
         List<Buff> buffList = Arrays.asList(buff);
-        SimpleEnemy simpleEnemy = mock(SimpleEnemy.class);
         when(buff.soakModifier()).thenReturn(1f);
-        when(simpleEnemy.getBuffs()).thenReturn(buffList);
-        when(simpleEnemy.getTotalBuffs()).thenReturn(1f);
-        when(simpleEnemy.getModifiedBuffs()).thenReturn(2f);
 
-        float modifiedBuffs = simpleEnemy.getModifiedBuffs();
-        assertEquals(2f, modifiedBuffs);
+        float buffs = new SimpleEnemy(armor, buffList).getTotalBuffs();
+        assertEquals(1f, buffs);
     }
 
     @Test
-    public void buffsShouldBeX() {
+    public void modifiedBuffsShouldBe2f() {
         Buff buff = mock(Buff.class);
+        Armor armor = mock(Armor.class);
         List<Buff> buffList = Arrays.asList(buff);
-        SimpleEnemy simpleEnemy = mock(SimpleEnemy.class);
         when(buff.soakModifier()).thenReturn(1f);
-        when(simpleEnemy.getBuffs()).thenReturn(buffList);
-        when(simpleEnemy.getTotalBuffs()).thenReturn(1f);
 
-        float buffs = simpleEnemy.getTotalBuffs();
-        assertEquals(1f, buffs);
+        float modifiedBuffs = new SimpleEnemy(armor, buffList).getModifiedBuffs();
+        assertEquals(2f, modifiedBuffs);
     }
 
     @Test
     public void enemyDamageSoakShouldBeX() {
         Buff buff = mock(Buff.class);
         List<Buff> buffList = Arrays.asList(buff);
-        SimpleEnemy simpleEnemy = mock(SimpleEnemy.class);
         when(buff.soakModifier()).thenReturn(1f);
-        when(simpleEnemy.getBuffs()).thenReturn(buffList);
-        when(simpleEnemy.getTotalBuffs()).thenReturn(1f);
-        when(simpleEnemy.getModifiedBuffs()).thenReturn(2f);
+        Armor armor = mock(Armor.class);
+        when(armor.getDamageSoak()).thenReturn(1);
 
-        float modifiedBuffs = simpleEnemy.getModifiedBuffs();
-        assertEquals(2f, modifiedBuffs);
+        int damageSoak = new SimpleEnemy(armor, buffList).getDamageSoak();
+        assertEquals(1, damageSoak);
     }
 }
