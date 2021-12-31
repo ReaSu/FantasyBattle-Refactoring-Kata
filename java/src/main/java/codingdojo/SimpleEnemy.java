@@ -33,4 +33,8 @@ public class SimpleEnemy extends Target {
     float getModifiedBuffs() {
         return getTotalBuffs() + BUFF_MODIFIER;
     }
+
+    int getDamageSoak() {
+        return armor.getDamageSoak();
+    }
 }
