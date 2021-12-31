@@ -115,4 +115,21 @@ public class PlayerTest {
         float buffs = simpleEnemy.getTotalBuffs();
         assertEquals(1f, buffs);
     }
+
+    @Test
+    public void modifiedBuffsShouldBe2f() {
+        Equipment equipment = mock(Equipment.class);
+        Stats stats = mock(Stats.class);
+        Buff buff = mock(Buff.class);
+        List<Buff> buffList = Arrays.asList(buff);
+        SimpleEnemy simpleEnemy = mock(SimpleEnemy.class);
+        when(buff.soakModifier()).thenReturn(1f);
+        when(simpleEnemy.getBuffs()).thenReturn(buffList);
+        when(simpleEnemy.getTotalBuffs()).thenReturn(1f);
+        when(simpleEnemy.getModifiedBuffs()).thenReturn(2f);
+
+        new Player(stats, equipment);
+        float modifiedBuffs = simpleEnemy.getModifiedBuffs();
+        assertEquals(2f, modifiedBuffs);
+    }
 }

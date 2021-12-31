@@ -6,6 +6,7 @@ import java.util.List;
 
 public class SimpleEnemy extends Target {
 
+    public static final float BUFF_MODIFIER = 1f;
     private Armor armor;
     private List<Buff> buffs;
 
@@ -27,5 +28,9 @@ public class SimpleEnemy extends Target {
                 .stream()
                 .mapToDouble(Buff::soakModifier)
                 .sum();
+    }
+
+    float getModifiedBuffs() {
+        return getTotalBuffs() + BUFF_MODIFIER;
     }
 }
