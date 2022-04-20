@@ -12,14 +12,6 @@ public class SimpleEnemy extends Target {
         this.buffs = buffs;
     }
 
-    List<Buff> getBuffs() {
-        return buffs;
-    }
-
-    Armor getArmor() {
-        return this.armor;
-    }
-
     float getTotalBuffs() {
         return (float) buffs
                 .stream()
@@ -36,7 +28,7 @@ public class SimpleEnemy extends Target {
     }
 
     @Override
-    int getFullSoak() {
+    int getSoak() {
         return Math.round(getDamageSoak() * getModifiedBuffs());
     }
 }

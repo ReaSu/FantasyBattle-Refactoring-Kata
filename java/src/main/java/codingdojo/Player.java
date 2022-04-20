@@ -4,45 +4,23 @@ package codingdojo;
 class Player extends Target {
     private final Equipment equipment;
     private final float modifiedStrength;
+    private static final float MODIFIER = 0.1f;
 
-    Player(Stats stats, Equipment equipment) {
+    Player(Equipment equipment, int strength) {
         this.equipment = equipment;
-        this.modifiedStrength = stats.getModifiedStrength();
+        this.modifiedStrength = strength * MODIFIER;
     }
 
     Damage calculateDamage(Target other) {
-        int soak = getSoak(other);
-        return new Damage(Math.max(0, getTotalDamage() - soak));
+        return new Damage(calculatedDamage(other));
     }
 
-
-
-    private int getSoak(Target other) {
-        int soak = 0;
-        if (other instanceof Player) {
-            // TODO: Not implemented yet
-            //  Add friendly fire
-            soak = getTotalDamage();
-        } else if (other instanceof SimpleEnemy) {
-            soak = other.getFullSoak();
-        }
-        return soak;
-    }
-
-    float getDamageModifier() {
-        return modifiedStrength + equipment.getDamageModifier();
-    }
-
-    int getBaseDamage() {
-        return equipment.getBaseDamage();
-    }
-
-    int getTotalDamage() {
-        return Math.round(getBaseDamage() * getDamageModifier());
+    private int calculatedDamage(Target other) {
+        return Math.max(0, equipment.getTotalDamage(modifiedStrength) - other.getSoak());
     }
 
     @Override
-    int getFullSoak() {
-        return getTotalDamage();
+    int getSoak() {
+        return equipment.getTotalDamage(modifiedStrength);
     }
 }

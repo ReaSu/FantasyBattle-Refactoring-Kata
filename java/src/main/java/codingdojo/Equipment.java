@@ -14,13 +14,18 @@ class Equipment {
     }
 
 
-
     int getBaseDamage() {
         return fullEquipment.stream().mapToInt(Item::getBaseDamage).sum();
     }
 
 
-    float getDamageModifier() {
-        return (float) fullEquipment.stream().mapToDouble(Item::getDamageModifier).sum();
+    float getDamageModifier(float modifiedStrength) {
+        return (float) fullEquipment.stream().mapToDouble(Item::getDamageModifier).sum()
+               + modifiedStrength;
     }
+
+    int getTotalDamage(float modifiedStrength) {
+        return Math.round(getBaseDamage() * getDamageModifier(modifiedStrength));
+    }
+
 }
